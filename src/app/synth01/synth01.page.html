@@ -1,0 +1,17 @@
+<!--
+<ion-header>
+  <ion-toolbar>
+    <ion-title>synth01</ion-title>
+  </ion-toolbar>
+</ion-header>
+-->
+
+<ion-content>
+  <ion-grid [style.height.px]="padContainerHeight" (window:resize)="onResize($event)">
+    <ion-row class="pad-row" *ngFor="let notes of notesArray">
+      <ion-col class="pad-col ion-activatable" *ngFor="let note of notes" (touchstart)="noteOn(note)">
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

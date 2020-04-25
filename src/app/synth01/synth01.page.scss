@@ -1,0 +1,93 @@
+$c-note: #c93a40;
+$d-note: #f2cf01;
+$e-note: #a0c238;
+$f-note: #cc528b;
+$g-note: #0074bf;
+$a-note: #d16b16;
+$b-note: #56a764;
+
+.pad-row {
+  height: 25%;
+}
+
+.pad-col {
+  border-radius: 8px;
+  border: 4px solid #000;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.pad-row:nth-child(1) {
+  .pad-col:nth-child(1) {
+    background: $c-note;
+  }
+
+  .pad-col:nth-child(2) {
+    background: $d-note;
+  }
+
+  .pad-col:nth-child(3) {
+    background: $e-note;
+  }
+
+  .pad-col:nth-child(4) {
+    background: $f-note;
+  }
+}
+
+.pad-row:nth-child(2) {
+  .pad-col:nth-child(1) {
+    background: $g-note;
+  }
+
+  .pad-col:nth-child(2) {
+    background: $a-note;
+  }
+
+  .pad-col:nth-child(3) {
+    background: $b-note;
+  }
+
+  .pad-col:nth-child(4) {
+    background: saturate($c-note, 8%);
+  }
+}
+
+.pad-row:nth-child(3) {
+  .pad-col:nth-child(1) {
+    background: saturate($d-note, 8%);
+  }
+
+  .pad-col:nth-child(2) {
+    background: saturate($e-note, 8%);
+  }
+
+  .pad-col:nth-child(3) {
+    background: saturate($f-note, 8%);
+  }
+
+  .pad-col:nth-child(4) {
+    background: saturate($g-note, 8%);
+  }
+}
+
+.pad-row:nth-child(4) {
+  .pad-col:nth-child(1) {
+    background: saturate($a-note, 8%);
+  }
+
+  .pad-col:nth-child(2) {
+    background: saturate($b-note, 8%);
+  }
+
+  .pad-col:nth-child(3) {
+    background: saturate($c-note, 32%);
+  }
+
+  .pad-col:nth-child(4) {
+    background: saturate($d-note, 32%);
+  }
+}

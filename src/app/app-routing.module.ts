@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'synth01',
+    loadChildren: () => import('./synth01/synth01.module').then( m => m.Synth01PageModule)
+  },
+  {
+    path: 'synth02',
+    loadChildren: () => import('./synth02/synth02.module').then( m => m.Synth02PageModule)
+  },
 ];
 
 @NgModule({
