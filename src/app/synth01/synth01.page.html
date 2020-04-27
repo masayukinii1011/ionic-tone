@@ -16,91 +16,56 @@
   </ion-grid>
   <ion-list>
     <ion-item>
-      <ion-label>Tremolo</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Frequency</ion-label>
-      <ion-range min="0" max="10" step="0.1" [(ngModel)]="tremoloFrequency" (ionChange)="onChangeValue($event.target.value)">
-        <ion-label slot="start">0</ion-label>
-        <ion-label slot="end">10</ion-label>
-      </ion-range>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item>
-      <ion-label>Vibrato</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Frequency</ion-label>
-      <ion-range min="0" max="10" step="0.1" [(ngModel)]="vibratoFrequency" (ionChange)="onChangeValue($event.target.value)">
-        <ion-label slot="start">0</ion-label>
-        <ion-label slot="end">10</ion-label>
-      </ion-range>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item>
       <ion-label>Wah</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>baseFrequency</ion-label>
       <ion-range min="40" max="400" [(ngModel)]="autoWahBaseFrequency" (ionChange)="onChangeValue($event.target.value)">
         <ion-label slot="start">40</ion-label>
         <ion-label slot="end">400</ion-label>
       </ion-range>
     </ion-item>
-  </ion-list>
-  <ion-list>
     <ion-item>
-      <ion-label>Chorus</ion-label>
+      <ion-label>Vibrato</ion-label>
+      <ion-range min="0" max="10" step="0.1" [(ngModel)]="vibratoFrequency" (ionChange)="onChangeValue($event.target.value)">
+        <ion-label slot="start">0</ion-label>
+        <ion-label slot="end">10</ion-label>
+      </ion-range>
     </ion-item>
     <ion-item>
-      <ion-label>Frequency</ion-label>
+      <ion-label>Chorus</ion-label>
       <ion-range min="0" max="1" step="0.1" [(ngModel)]="chorusFrequency" (ionChange)="onChangeValue($event.target.value)">
         <ion-label slot="start">0</ion-label>
         <ion-label slot="end">1</ion-label>
       </ion-range>
     </ion-item>
-  </ion-list>
-  <ion-list>
     <ion-item>
-      <ion-label>Delay</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Time</ion-label>
+      <ion-label>DelayTime</ion-label>
       <ion-range min="0" max="1" step="0.1" [(ngModel)]="delayTime" (ionChange)="onChangeValue($event.target.value)">
         <ion-label slot="start">0</ion-label>
         <ion-label slot="end">1</ion-label>
       </ion-range>
     </ion-item>
     <ion-item>
-      <ion-label>Feedback</ion-label>
+      <ion-label>DelayFeedback</ion-label>
       <ion-range min="0" max="1" step="0.01" [(ngModel)]="delayFeedback" (ionChange)="onChangeValue($event.target.value)">
         <ion-label slot="start">0</ion-label>
         <ion-label slot="end">1</ion-label>
       </ion-range>
     </ion-item>
-  </ion-list>
-  <ion-list>
     <ion-item>
-      <ion-label>Reverb</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>RoomSize</ion-label>
+      <ion-label>ReverbRoomSize</ion-label>
       <ion-range min="0" max="1" step="0.01" [(ngModel)]="reverbRoomSize" (ionChange)="onChangeValue($event.target.value)">
         <ion-label slot="start">0</ion-label>
         <ion-label slot="end">1</ion-label>
       </ion-range>
     </ion-item>
     <ion-item>
-      <ion-label>Dampening</ion-label>
+      <ion-label>ReverbDampening</ion-label>
       <ion-range min="0" max="10000" [(ngModel)]="reverbDampening" (ionChange)="onChangeValue($event.target.value)">
         <ion-label slot="start">0</ion-label>
         <ion-label slot="end">10000</ion-label>
       </ion-range>
     </ion-item>
     <ion-item>
-      <ion-label>Dry/Wet</ion-label>
+      <ion-label>ReverbWet</ion-label>
       <ion-range min="0" max="100" [(ngModel)]="reverbWet" (ionChange)="onChangeValue($event.target.value)">
         <ion-label slot="start">0</ion-label>
         <ion-label slot="end">100</ion-label>
