@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as Tone from 'tone';
+import { TokenError } from '@angular/compiler/src/ml_parser/lexer';
 
 @Component({
   selector: 'app-synth01',
@@ -10,10 +11,22 @@ export class Synth01Page implements OnInit, AfterViewInit {
 
   synth: Tone;
 
+  tremolo: Tone;
+  tremoloFrequency = 0;
+
+  vibrato: Tone;
+  vibratoFrequency = 0;
+
+  autoWah: Tone;
+  autoWahBaseFrequency = 400;
+
+  chorus: Tone;
+  chorusFrequency = 0;
+
   delay: Tone;
   delayTime = 0;
   delayFeedback = 0;
-  delayWet = 0;
+  delayWet = 50;
 
   reverb: Tone;
   reverbRoomSize = 0;
@@ -42,12 +55,21 @@ export class Synth01Page implements OnInit, AfterViewInit {
         type: 'triangle'
       },
       envelope: {
-        attack: 0.01,
-        decay: 0.1,
-        sustain: 0.1,
-        release: 10
+        attack: 0.04,
+        decay: 1,
+        sustain: 1,
+        release: 4
       },
     });
+
+    this.tremolo = new Tone.Tremolo(this.tremoloFrequency);
+    this.tremolo.start();
+
+    this.vibrato = new Tone.Vibrato(this.vibratoFrequency);
+
+    this.autoWah = new Tone.AutoWah(this.autoWahBaseFrequency);
+
+    this.chorus = new Tone.Chorus(this.chorusFrequency);
 
     this.delay = new Tone.FeedbackDelay(this.delayTime, this.delayFeedback);
     this.delay.wet.value = this.delayWet;
@@ -56,18 +78,27 @@ export class Synth01Page implements OnInit, AfterViewInit {
     this.reverb.wet.value = this.reverbWet;
     this.reverb.toMaster();
 
-    this.synth.chain(this.delay, this.reverb);
+    this.synth.chain(this.tremolo, this.vibrato, this.autoWah, this.chorus, this.delay, this.reverb);
   }
 
   onChangeValue(value) {
+    if (value === this.tremoloFrequency) {
+      this.tremolo.frequency.value = value;
+    }
+    if (value === this.vibratoFrequency) {
+      this.vibrato.frequency.value = value;
+    }
+    if (value === this.autoWahBaseFrequency) {
+      this.autoWah.baseFrequency = value;
+    }
+    if (value === this.chorusFrequency) {
+      this.chorus.frequency.value = value;
+    }
     if (value === this.delayTime) {
       this.delay.delayTime.value = value;
     }
     if (value === this.delayFeedback) {
       this.delay.feedback.value = value;
-    }
-    if (value === this.delayWet) {
-      this.delay.wet.value = value;
     }
     if (value === this.reverbRoomSize) {
       this.reverb.roomSize.value = value;
@@ -89,7 +120,13 @@ export class Synth01Page implements OnInit, AfterViewInit {
   }
 
   noteOn(note, event) {
-    this.synth.triggerAttackRelease(note, 0.1);
+    this.synth.triggerAttack(note);
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  noteOff(note, event) {
+    this.synth.triggerRelease(note);
     event.stopPropagation();
     event.preventDefault();
   }
