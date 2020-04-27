@@ -6,6 +6,24 @@ $g-note: #0074bf;
 $a-note: #d16b16;
 $b-note: #56a764;
 
+
+ion-range {
+  padding: 0;
+}
+
+ion-label {
+  font-size: 10px !important;
+}
+
+ion-item .item-native {
+  padding: 0;
+}
+
+.effect-label {
+  overflow: visible;
+  min-width: 88px;
+}
+
 .pad-row {
   height: 25%;
 }
