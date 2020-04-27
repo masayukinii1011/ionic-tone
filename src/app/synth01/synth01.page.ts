@@ -9,8 +9,16 @@ import * as Tone from 'tone';
 export class Synth01Page implements OnInit, AfterViewInit {
 
   synth: Tone;
+
   delay: Tone;
+  delayTime = 0;
+  delayFeedback = 0;
+  delayWet = 0;
+
   reverb: Tone;
+  reverbRoomSize = 0;
+  reverbDampening = 0;
+  reverbWet = 0;
 
   notesArray = [
     ['C4', 'D4', 'E4', 'F4'],
@@ -31,20 +39,45 @@ export class Synth01Page implements OnInit, AfterViewInit {
 
     this.synth = new Tone.PolySynth(4, Tone.Synth, {
       oscillator: {
-        type: 'pulse'
+        type: 'triangle'
       },
       envelope: {
-        attack: 0.4,
+        attack: 0.01,
         decay: 0.1,
         sustain: 0.1,
-        release: 100
+        release: 10
       },
     });
 
-    this.delay = new Tone.FeedbackDelay('6n', 0.4);
-    this.reverb = new Tone.Freeverb(0.1, 100).toMaster();
+    this.delay = new Tone.FeedbackDelay(this.delayTime, this.delayFeedback);
+    this.delay.wet.value = this.delayWet;
+
+    this.reverb = new Tone.Freeverb(this.reverbRoomSize, this.reverbDampening);
+    this.reverb.wet.value = this.reverbWet;
+    this.reverb.toMaster();
 
     this.synth.chain(this.delay, this.reverb);
+  }
+
+  onChangeValue(value) {
+    if (value === this.delayTime) {
+      this.delay.delayTime.value = value;
+    }
+    if (value === this.delayFeedback) {
+      this.delay.feedback.value = value;
+    }
+    if (value === this.delayWet) {
+      this.delay.wet.value = value;
+    }
+    if (value === this.reverbRoomSize) {
+      this.reverb.roomSize.value = value;
+    }
+    if (value === this.reverbDampening) {
+      this.reverb.dampening.value = value;
+    }
+    if (value === this.reverbWet) {
+      this.reverb.wet.value = value;
+    }
   }
 
   onResize(event) {
@@ -55,7 +88,9 @@ export class Synth01Page implements OnInit, AfterViewInit {
     this.padContainerHeight = height;
   }
 
-  noteOn(note) {
-    this.synth.triggerAttackRelease(note, '8n');
+  noteOn(note, event) {
+    this.synth.triggerAttackRelease(note, 0.1);
+    event.stopPropagation();
+    event.preventDefault();
   }
 }
