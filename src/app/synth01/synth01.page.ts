@@ -48,7 +48,7 @@ export class Synth01Page implements AfterViewInit {
     this.delay = new Tone.FeedbackDelay(this.delayTime, this.delayFeedback);
     this.delay.wet.value = 50;
 
-    this.reverb = new Tone.Freeverb(this.reverbRoomSize, 400);
+    this.reverb = new Tone.Freeverb(this.reverbRoomSize, 4000);
     this.reverb.wet.value = this.reverbWet;
     this.reverb.toMaster();
 
