@@ -52,16 +52,9 @@
     </ion-item>
     <ion-item>
       <ion-label class="effect-label">ReverbRoomSize</ion-label>
-      <ion-range min="0" max="1" step="0.01" [(ngModel)]="reverbRoomSize" (ionChange)="onChangeValue($event.target.value)">
+      <ion-range min="0" max="0.9" step="0.01" [(ngModel)]="reverbRoomSize" (ionChange)="onChangeValue($event.target.value)">
         <ion-label slot="start">0</ion-label>
         <ion-label slot="end">1</ion-label>
-      </ion-range>
-    </ion-item>
-    <ion-item>
-      <ion-label class="effect-label">ReverbDampening</ion-label>
-      <ion-range min="0" max="10000" [(ngModel)]="reverbDampening" (ionChange)="onChangeValue($event.target.value)">
-        <ion-label slot="start">0</ion-label>
-        <ion-label slot="end">10000</ion-label>
       </ion-range>
     </ion-item>
     <ion-item>

@@ -8,7 +8,8 @@ import * as Tone from 'tone';
 })
 export class Synth01Page implements AfterViewInit {
 
-  synth: Tone;
+  padContainerHeight: number;
+  effectContainerHeight: number;
 
   autoWah: Tone;
   autoWahBaseFrequency = 400;
@@ -25,11 +26,9 @@ export class Synth01Page implements AfterViewInit {
 
   reverb: Tone;
   reverbRoomSize = 0;
-  reverbDampening = 0;
   reverbWet = 0;
 
-  padContainerHeight: number;
-  effectContainerHeight: number;
+  synth: Tone;
 
   notesArray = [
     ['C4', 'D4', 'E4', 'F4'],
@@ -42,6 +41,16 @@ export class Synth01Page implements AfterViewInit {
     this.setpadContainerHeight(window.innerWidth);
     this.setEffectContainerHeight(window.innerHeight);
 
+    this.autoWah = new Tone.AutoWah(this.autoWahBaseFrequency);
+    this.vibrato = new Tone.Vibrato(this.vibratoFrequency);
+    this.chorus = new Tone.Chorus(this.chorusFrequency);
+
+    this.delay = new Tone.FeedbackDelay(this.delayTime, this.delayFeedback);
+    this.delay.wet.value = 50;
+
+    this.reverb = new Tone.Freeverb(this.reverbRoomSize, 400);
+    this.reverb.wet.value = this.reverbWet;
+    this.reverb.toMaster();
 
     this.synth = new Tone.PolySynth(4, Tone.Synth, {
       oscillator: {
@@ -53,22 +62,7 @@ export class Synth01Page implements AfterViewInit {
         sustain: 1,
         release: 4
       },
-    });
-
-    this.autoWah = new Tone.AutoWah(this.autoWahBaseFrequency);
-
-    this.vibrato = new Tone.Vibrato(this.vibratoFrequency);
-
-    this.chorus = new Tone.Chorus(this.chorusFrequency);
-
-    this.delay = new Tone.FeedbackDelay(this.delayTime, this.delayFeedback);
-    this.delay.wet.value = 50;
-
-    this.reverb = new Tone.Freeverb(this.reverbRoomSize, this.reverbDampening);
-    this.reverb.wet.value = this.reverbWet;
-    this.reverb.toMaster();
-
-    this.synth.chain(this.autoWah, this.vibrato, this.chorus, this.delay, this.reverb);
+    }).chain(this.autoWah, this.vibrato, this.chorus, this.delay, this.reverb);
   }
 
   onChangeValue(value) {
@@ -89,9 +83,6 @@ export class Synth01Page implements AfterViewInit {
     }
     if (value === this.reverbRoomSize) {
       this.reverb.roomSize.value = value;
-    }
-    if (value === this.reverbDampening) {
-      this.reverb.dampening.value = value;
     }
     if (value === this.reverbWet) {
       this.reverb.wet.value = value;
