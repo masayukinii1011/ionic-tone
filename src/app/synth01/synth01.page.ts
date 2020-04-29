@@ -1,13 +1,12 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import * as Tone from 'tone';
-import { TokenError } from '@angular/compiler/src/ml_parser/lexer';
 
 @Component({
   selector: 'app-synth01',
   templateUrl: './synth01.page.html',
   styleUrls: ['./synth01.page.scss'],
 })
-export class Synth01Page implements OnInit, AfterViewInit {
+export class Synth01Page implements AfterViewInit {
 
   synth: Tone;
 
@@ -29,22 +28,20 @@ export class Synth01Page implements OnInit, AfterViewInit {
   reverbDampening = 0;
   reverbWet = 0;
 
+  padContainerHeight: number;
+  effectContainerHeight: number;
+
   notesArray = [
     ['C4', 'D4', 'E4', 'F4'],
     ['G4', 'A4', 'B4', 'C5'],
     ['D5', 'E5', 'F5', 'G5'],
     ['A5', 'B5', 'C6', 'D6']
   ];
-  padContainerHeight: number;
-
-  constructor() { }
-
-  ngOnInit() {
-
-  }
 
   ngAfterViewInit() {
     this.setpadContainerHeight(window.innerWidth);
+    this.setEffectContainerHeight(window.innerHeight);
+
 
     this.synth = new Tone.PolySynth(4, Tone.Synth, {
       oscillator: {
@@ -103,10 +100,15 @@ export class Synth01Page implements OnInit, AfterViewInit {
 
   onResize(event) {
     this.setpadContainerHeight(event.target.innerWidth);
+    this.setEffectContainerHeight(event.target.innerHeight);
   }
 
-  setpadContainerHeight(height) {
-    this.padContainerHeight = height;
+  setpadContainerHeight(windowWidth) {
+    this.padContainerHeight = windowWidth;
+  }
+
+  setEffectContainerHeight(windowHeight) {
+    this.effectContainerHeight = windowHeight - this.padContainerHeight;
   }
 
   noteOn(note, event) {

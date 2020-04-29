@@ -5,8 +5,8 @@
   </ion-toolbar>
 </ion-header>
 -->
-
-  <ion-grid fixed="true" [style.height.px]="padContainerHeight" (window:resize)="onResize($event)">
+<ion-content scroll-y="false" (window:resize)="onResize($event)">
+  <ion-grid fixed="true" [style.height.px]="padContainerHeight">
     <ion-row class="pad-row" *ngFor="let notes of notesArray">
       <ion-col class="pad-col ion-activatable" *ngFor="let note of notes" (touchstart)="noteOn(note, $event)" (touchend)="noteOff(note, $event)" (mousedown)="noteOn(note, $event)" (mouseup)="noteOff(note, $event)">
         <ion-ripple-effect></ion-ripple-effect>
@@ -14,8 +14,7 @@
     </ion-row>
   </ion-grid>
 
-<ion-content>
-  <ion-list>
+  <ion-list [style.height.px]="effectContainerHeight">
     <ion-item>
       <ion-label class="effect-label">Wah</ion-label>
       <ion-range min="40" max="400" [(ngModel)]="autoWahBaseFrequency" (ionChange)="onChangeValue($event.target.value)">
