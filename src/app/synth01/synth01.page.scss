@@ -147,18 +147,32 @@ ion-label {
   width: 20px;
 }
 
-@media only screen and (orientation:portrait) {
+@media screen and (orientation:portrait) {
   .effect-name {
     padding-left: 8px;
   }
 }
 
-@media only screen and (orientation:landscape) {
+@media screen and (orientation:landscape) {
   .content-inner {
     display: flex;
   }
 
   .effect-name {
     padding-left: 4px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .pad-area {
+    max-width: 700px;
+    max-height: 700px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 768px) and (orientation:landscape) {
+  .effect-area {
+    min-width: 300px;
   }
 }
