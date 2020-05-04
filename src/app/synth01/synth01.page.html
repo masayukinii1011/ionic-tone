@@ -5,72 +5,79 @@
   </ion-toolbar>
 </ion-header>
 -->
-<ion-content scroll-y="false" (window:resize)="onResize($event)">
+<ion-content scroll-y="false" (window:resize)="onResize()">
+<div class="content-inner">
 
-  <ion-grid fixed="true" [style.height.px]="padContainerHeight">
-    <ion-row class="pad-row" *ngFor="let notes of notesArray">
-      <ion-col class="pad-col ion-activatable" *ngFor="let note of notes" (touchstart)="noteOn(note, $event)" (touchend)="noteOff(note, $event)" (mousedown)="noteOn(note, $event)" (mouseup)="noteOff(note, $event)">
+<div class="pad-area" [style.height.px]="padAreaHeight" [style.width.px]="padAreaWidth">
+  <ion-grid>
+    <ion-row *ngFor="let notes of notesArray">
+      <ion-col class=" ion-activatable" *ngFor="let note of notes" (touchstart)="noteOn(note, $event)" (touchend)="noteOff(note, $event)" (mousedown)="noteOn(note, $event)" (mouseup)="noteOff(note, $event)">
         <ion-ripple-effect></ion-ripple-effect>
       </ion-col>
     </ion-row>
   </ion-grid>
+  </div>
 
-  <ion-list [style.height.px]="effectContainerHeight">
+<div class="effect-area" [style.height.px]="effectAreaHeight" [style.width.px]="effectAreaWidth">
+  <ion-list class="ion-no-padding">
 
-    <ion-item>
+    <ion-item class="ion-no-padding">
       <ion-label class="effect-name">Wah</ion-label>
-      <ion-range min="40" max="400" [(ngModel)]="autoWahBaseFrequency" (ionChange)="onChangeValue($event.target.value)">
+      <ion-range class="ion-no-padding" min="40" max="400" [(ngModel)]="autoWahBaseFrequency" (ionChange)="onChangeValue($event.target.value)">
         <ion-label class="effect-value" slot="start">40</ion-label>
         <ion-label class="effect-value" slot="end">400</ion-label>
       </ion-range>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="ion-no-padding">
       <ion-label class="effect-name">Vibrato</ion-label>
-      <ion-range min="0" max="10" step="0.1" [(ngModel)]="vibratoFrequency" (ionChange)="onChangeValue($event.target.value)">
+      <ion-range class="ion-no-padding" min="0" max="10" step="0.1" [(ngModel)]="vibratoFrequency" (ionChange)="onChangeValue($event.target.value)">
         <ion-label class="effect-value" slot="start">0</ion-label>
         <ion-label class="effect-value" slot="end">10</ion-label>
       </ion-range>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="ion-no-padding">
       <ion-label class="effect-name">Chorus</ion-label>
-      <ion-range min="0" max="1" step="0.1" [(ngModel)]="chorusFrequency" (ionChange)="onChangeValue($event.target.value)">
+      <ion-range class="ion-no-padding" min="0" max="1" step="0.1" [(ngModel)]="chorusFrequency" (ionChange)="onChangeValue($event.target.value)">
         <ion-label class="effect-value" slot="start">0</ion-label>
         <ion-label class="effect-value" slot="end">1</ion-label>
       </ion-range>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="ion-no-padding">
       <ion-label class="effect-name">DelayTime</ion-label>
-      <ion-range min="0" max="1" step="0.1" [(ngModel)]="delayTime" (ionChange)="onChangeValue($event.target.value)">
+      <ion-range class="ion-no-padding" min="0" max="1" step="0.1" [(ngModel)]="delayTime" (ionChange)="onChangeValue($event.target.value)">
         <ion-label class="effect-value" slot="start">0</ion-label>
         <ion-label class="effect-value" slot="end">1</ion-label>
       </ion-range>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="ion-no-padding">
       <ion-label class="effect-name">DelayFeedback</ion-label>
-      <ion-range min="0" max="1" step="0.01" [(ngModel)]="delayFeedback" (ionChange)="onChangeValue($event.target.value)">
+      <ion-range class="ion-no-padding" min="0" max="1" step="0.01" [(ngModel)]="delayFeedback" (ionChange)="onChangeValue($event.target.value)">
         <ion-label class="effect-value" slot="start">0</ion-label>
         <ion-label class="effect-value" slot="end">1</ion-label>
       </ion-range>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="ion-no-padding">
       <ion-label class="effect-name">ReverbRoomSize</ion-label>
-      <ion-range min="0" max="0.9" step="0.01" [(ngModel)]="reverbRoomSize" (ionChange)="onChangeValue($event.target.value)">
+      <ion-range class="ion-no-padding" min="0" max="0.9" step="0.01" [(ngModel)]="reverbRoomSize" (ionChange)="onChangeValue($event.target.value)">
         <ion-label class="effect-value" slot="start">0</ion-label>
         <ion-label class="effect-value" slot="end">1</ion-label>
       </ion-range>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="ion-no-padding">
       <ion-label class="effect-name">ReverbWet</ion-label>
-      <ion-range min="0" max="100" [(ngModel)]="reverbWet" (ionChange)="onChangeValue($event.target.value)">
+      <ion-range class="ion-no-padding" min="0" max="100" [(ngModel)]="reverbWet" (ionChange)="onChangeValue($event.target.value)">
         <ion-label class="effect-value" slot="start">0</ion-label>
         <ion-label class="effect-value" slot="end">100</ion-label>
       </ion-range>
     </ion-item>
   </ion-list>
+  
+  </div>
+</div>
 </ion-content>

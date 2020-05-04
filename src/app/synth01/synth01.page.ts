@@ -7,9 +7,10 @@ import * as Tone from 'tone';
   styleUrls: ['./synth01.page.scss'],
 })
 export class Synth01Page implements AfterViewInit {
-
-  padContainerHeight: number;
-  effectContainerHeight: number;
+  padAreaHeight: number;
+  padAreaWidth: number;
+  effectAreaHeight: number;
+  effectAreaWidth: number;
 
   autoWah: Tone;
   autoWahBaseFrequency = 400;
@@ -38,8 +39,8 @@ export class Synth01Page implements AfterViewInit {
   ];
 
   ngAfterViewInit() {
-    this.setpadContainerHeight(window.innerWidth);
-    this.setEffectContainerHeight(window.innerHeight);
+    this.setpadAreaSize();
+    this.setEffectAreaSize();
 
     this.autoWah = new Tone.AutoWah(this.autoWahBaseFrequency);
     this.vibrato = new Tone.Vibrato(this.vibratoFrequency);
@@ -63,6 +64,67 @@ export class Synth01Page implements AfterViewInit {
         release: 4
       },
     }).chain(this.autoWah, this.vibrato, this.chorus, this.delay, this.reverb);
+  }
+
+  /**
+   * リサイズイベント
+   */
+  onResize() {
+    this.setpadAreaSize();
+    this.setEffectAreaSize();
+  }
+
+  /**
+   * パッドエリアのサイズを指定
+   */
+  setpadAreaSize() {
+    // 縦向き
+    if (window.orientation === 0) {
+      this.padAreaHeight = window.innerWidth;
+      this.padAreaWidth = window.innerWidth;
+    } else {
+      // 横向き
+      this.padAreaHeight = window.innerHeight;
+      this.padAreaWidth = window.innerHeight;
+    }
+  }
+
+  /**
+   * エフェクトエリアのサイズを指定
+   */
+  setEffectAreaSize() {
+    // 縦向き
+    if (window.orientation === 0) {
+      this.effectAreaHeight = window.innerHeight - this.padAreaHeight;
+      this.effectAreaWidth = window.innerWidth;
+    } else {
+      // 横向き
+      this.effectAreaHeight = window.innerHeight;
+      this.effectAreaWidth = window.innerWidth - this.padAreaWidth;
+    }
+  }
+
+  /**
+   * 音を発生
+   * @param note 音階
+   * @param event イベント
+   */
+  noteOn(note, event) {
+    this.synth.triggerAttack(note);
+    // イベントの伝搬を停止
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  /**
+   * 音を停止
+   * @param note 音階
+   * @param event イベント
+   */
+  noteOff(note, event) {
+    this.synth.triggerRelease(note);
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   /**
@@ -91,53 +153,5 @@ export class Synth01Page implements AfterViewInit {
     if (value === this.reverbWet) {
       this.reverb.wet.value = value;
     }
-  }
-
-  /**
-   * リサイズイベント
-   * @param event イベント
-   */
-  onResize(event) {
-    this.setpadContainerHeight(event.target.innerWidth);
-    this.setEffectContainerHeight(event.target.innerHeight);
-  }
-
-  /**
-   * パッドエリアの高さを指定
-   * @param windowWidth windowの幅
-   */
-  setpadContainerHeight(windowWidth) {
-    this.padContainerHeight = windowWidth;
-  }
-
-  /**
-   * エフェクトエリアの高さを指定
-   * @param windowHeight windowの幅
-   */
-  setEffectContainerHeight(windowHeight) {
-    this.effectContainerHeight = windowHeight - this.padContainerHeight;
-  }
-
-  /**
-   * 音を発生
-   * @param note 音階
-   * @param event イベント
-   */
-  noteOn(note, event) {
-    this.synth.triggerAttack(note);
-    // イベントの伝搬を停止
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
-  /**
-   * 音を停止
-   * @param note 音階
-   * @param event イベント
-   */
-  noteOff(note, event) {
-    this.synth.triggerRelease(note);
-    event.stopPropagation();
-    event.preventDefault();
   }
 }
