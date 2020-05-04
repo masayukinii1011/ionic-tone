@@ -14,6 +14,8 @@ $b-note: #56a764;
   border-radius: 8px;
   margin: 4px;
   cursor: pointer;
+  border-right: solid 2px;
+  border-bottom: solid 2px;
 
   &:hover {
     opacity: 0.9;
@@ -23,72 +25,104 @@ $b-note: #56a764;
 .pad-row:nth-child(1) {
   .pad-col:nth-child(1) {
     background: $c-note;
+    border-right-color: darken($c-note, 20%);
+    border-bottom-color: darken($c-note, 24%);
   }
 
   .pad-col:nth-child(2) {
     background: $d-note;
+    border-right-color: darken($d-note, 20%);
+    border-bottom-color: darken($d-note, 24%);
   }
 
   .pad-col:nth-child(3) {
     background: $e-note;
+    border-right-color: darken($e-note, 20%);
+    border-bottom-color: darken($e-note, 24%);
   }
 
   .pad-col:nth-child(4) {
     background: $f-note;
+    border-right-color: darken($f-note, 20%);
+    border-bottom-color: darken($f-note, 24%);
   }
 }
 
 .pad-row:nth-child(2) {
   .pad-col:nth-child(1) {
     background: $g-note;
+    border-right-color: darken($g-note, 20%);
+    border-bottom-color: darken($g-note, 24%);
   }
 
   .pad-col:nth-child(2) {
     background: $a-note;
+    border-right-color: darken($a-note, 20%);
+    border-bottom-color: darken($a-note, 24%);
   }
 
   .pad-col:nth-child(3) {
     background: $b-note;
+    border-right-color: darken($b-note, 20%);
+    border-bottom-color: darken($b-note, 24%);
   }
 
   .pad-col:nth-child(4) {
     background: saturate($c-note, 8%);
+    border-right-color: darken(saturate($c-note, 8%), 20%);
+    border-bottom-color: darken(saturate($c-note, 8%), 24%);
   }
 }
 
 .pad-row:nth-child(3) {
   .pad-col:nth-child(1) {
     background: saturate($d-note, 8%);
+    border-right-color: darken(saturate($d-note, 8%), 20%);
+    border-bottom-color: darken(saturate($d-note, 8%), 24%);
   }
 
   .pad-col:nth-child(2) {
     background: saturate($e-note, 8%);
+    border-right-color: darken(saturate($e-note, 8%), 20%);
+    border-bottom-color: darken(saturate($e-note, 8%), 24%);
   }
 
   .pad-col:nth-child(3) {
     background: saturate($f-note, 8%);
+    border-right-color: darken(saturate($f-note, 8%), 20%);
+    border-bottom-color: darken(saturate($f-note, 8%), 24%);
   }
 
   .pad-col:nth-child(4) {
     background: saturate($g-note, 8%);
+    border-right-color: darken(saturate($g-note, 8%), 20%);
+    border-bottom-color: darken(saturate($g-note, 8%), 24%);
   }
 }
 
 .pad-row:nth-child(4) {
   .pad-col:nth-child(1) {
     background: saturate($a-note, 8%);
+    border-right-color: darken(saturate($a-note, 8%), 20%);
+    border-bottom-color: darken(saturate($a-note, 8%), 24%);
   }
 
   .pad-col:nth-child(2) {
     background: saturate($b-note, 8%);
+    border-right-color: darken(saturate($b-note, 8%), 20%);
+    border-bottom-color: darken(saturate($b-note, 8%), 24%);
   }
 
   .pad-col:nth-child(3) {
     background: saturate($c-note, 32%);
+    border-right-color: darken(saturate($c-note, 32%), 20%);
+    border-bottom-color: darken(saturate($c-note, 32%), 24%);
   }
 
   .pad-col:nth-child(4) {
     background: saturate($d-note, 32%);
+    border-right-color: darken(saturate($d-note, 32%), 20%);
+    border-bottom-color: darken(saturate($d-note, 32%), 24%);
   }
 }
 
@@ -108,7 +142,10 @@ ion-label {
   font-size: 10px !important;
 }
 
-.effect-label {
-  overflow: visible;
+.effect-name {
   min-width: 88px;
+}
+
+.effect-value {
+  width: 20px;
 }

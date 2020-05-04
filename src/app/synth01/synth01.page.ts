@@ -65,6 +65,10 @@ export class Synth01Page implements AfterViewInit {
     }).chain(this.autoWah, this.vibrato, this.chorus, this.delay, this.reverb);
   }
 
+  /**
+   * エフェクトの値が変更された時
+   * @param value エフェクトの値
+   */
   onChangeValue(value) {
     if (value === this.autoWahBaseFrequency) {
       this.autoWah.baseFrequency = value;
@@ -89,25 +93,48 @@ export class Synth01Page implements AfterViewInit {
     }
   }
 
+  /**
+   * リサイズイベント
+   * @param event イベント
+   */
   onResize(event) {
     this.setpadContainerHeight(event.target.innerWidth);
     this.setEffectContainerHeight(event.target.innerHeight);
   }
 
+  /**
+   * パッドエリアの高さを指定
+   * @param windowWidth windowの幅
+   */
   setpadContainerHeight(windowWidth) {
     this.padContainerHeight = windowWidth;
   }
 
+  /**
+   * エフェクトエリアの高さを指定
+   * @param windowHeight windowの幅
+   */
   setEffectContainerHeight(windowHeight) {
     this.effectContainerHeight = windowHeight - this.padContainerHeight;
   }
 
+  /**
+   * 音を発生
+   * @param note 音階
+   * @param event イベント
+   */
   noteOn(note, event) {
     this.synth.triggerAttack(note);
+    // イベントの伝搬を停止
     event.stopPropagation();
     event.preventDefault();
   }
 
+  /**
+   * 音を停止
+   * @param note 音階
+   * @param event イベント
+   */
   noteOff(note, event) {
     this.synth.triggerRelease(note);
     event.stopPropagation();
