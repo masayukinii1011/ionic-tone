@@ -141,6 +141,7 @@ ion-label {
 
 .effect-name {
   min-width: 90px;
+  max-width: 90px;
 }
 
 .effect-value {
@@ -163,16 +164,37 @@ ion-label {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 767px) {
   .pad-area {
-    max-width: 700px;
-    max-height: 700px;
-    margin: 0 auto;
+    max-width: 414px;
+    max-height: 414px;
+    min-width: 264px;
+    min-height: 264px;
+    margin: auto;
   }
 }
 
-@media screen and (min-width: 768px) and (orientation:landscape) {
+@media screen and (max-width: 767px) and (orientation:portrait) {
   .effect-area {
-    min-width: 300px;
+    min-width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .pad-area {
+    max-width: 714px;
+    max-height: 714px;
+    margin: auto;
+  }
+
+  .effect-area {
+    min-width: 248px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .pad-area {
+    max-width: none;
+    max-height: none;
   }
 }
