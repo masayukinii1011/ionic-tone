@@ -1,6 +1,5 @@
 {
   "name": "ionic-tone",
   "integrations": {},
-  "type": "angular",
-  "orientation": "portrait"
+  "type": "angular"
 }
