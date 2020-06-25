@@ -1,6 +1,17 @@
 # ToneSynth
-[Desktop App for Win](https://drive.google.com/open?id=171XiP-DMXLLhFa8WNXL7Ypxu3T7HaU8u)  
-[Desktop App for Mac](https://drive.google.com/open?id=1Djnuihvq3WjYpak__liStpnyHwN5ZEa5)
+IonicとTone.js(Web Audio APIを扱うライブラリ)でシンセサイザーを作成しました。  
+Androidアプリ、デスクトップアプリ(Electron)、PWAとして使用できます。  
+4x4のパッドに触れると音を出力。  
+スライダーでエフェクトをかけられます。
+## Google Play
+https://play.google.com/store/apps/details?id=nii_tone_synth_io.ionic.starter
+## Desktop App(Electron)
+### Windows
+https://drive.google.com/file/d/171XiP-DMXLLhFa8WNXL7Ypxu3T7HaU8u/view
+### Mac
+https://drive.google.com/file/d/1Djnuihvq3WjYpak__liStpnyHwN5ZEa5/view
+## PWA
+https://ionic-tone.netlify.app/
 
 以下のとおり個人情報保護方針を定め、個人情報保護の仕組みを構築し、個人情報保護の重要性の認識と取組みを徹底することにより、個人情報の保護を推進致します。  
 
