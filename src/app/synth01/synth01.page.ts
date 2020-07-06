@@ -53,7 +53,7 @@ export class Synth01Page implements AfterViewInit {
     this.reverb.wet.value = this.reverbWet;
     this.reverb.toMaster();
 
-    this.synth = new Tone.PolySynth(4, Tone.Synth, {
+    this.synth = new Tone.PolySynth(6, Tone.Synth, {
       oscillator: {
         type: 'triangle'
       },
