@@ -31,7 +31,7 @@
     "@ionic/angular": "^5.0.0",
     "cordova-android": "8.1.0",
     "core-js": "^2.5.4",
-    "electron": "^8.2.5",
+    "electron": "^13.6.6",
     "ngx-electron": "^2.2.0",
     "rxjs": "~6.5.1",
     "tone": "^13.8.25",
