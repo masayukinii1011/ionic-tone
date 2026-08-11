@@ -14,7 +14,6 @@
 - 4×4（16音）のタッチ／クリックパッド
 - 7 本のエフェクトスライダー（Filter / Vibrato / Chorus / Delay / Reverb）
 - スマホ・PC ブラウザ対応（PWA としてホーム画面に追加可能）
-- オフライン再生（Service Worker）
 
 ---
 
