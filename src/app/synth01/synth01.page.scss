@@ -149,17 +149,6 @@ ion-list {
   flex-direction: column;
 }
 
-.synth-info {
-  flex-shrink: 0;
-  margin: 0;
-  padding: 6px 12px 4px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--ion-color-medium, #92949c);
-  text-align: center;
-  border-bottom: 1px solid var(--ion-color-light, #f4f5f8);
-}
-
 ion-label {
   font-size: 12px !important;
 }
