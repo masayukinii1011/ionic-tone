@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import * as Tone from 'tone';
 
 @Component({
@@ -6,30 +6,35 @@ import * as Tone from 'tone';
   templateUrl: './synth01.page.html',
   styleUrls: ['./synth01.page.scss'],
 })
-export class Synth01Page implements AfterViewInit {
+export class Synth01Page implements AfterViewInit, OnDestroy {
   padAreaHeight: number;
   padAreaWidth: number;
   effectAreaHeight: number;
   effectAreaWidth: number;
 
-  autoWah: Tone;
+  showStartOverlay = !localStorage.getItem('tone-synth-started');
+
+  autoWah: Tone.AutoWah;
   autoWahBaseFrequency = 400;
 
-  vibrato: Tone;
+  vibrato: Tone.Vibrato;
   vibratoFrequency = 0;
 
-  chorus: Tone;
+  chorus: Tone.Chorus;
   chorusFrequency = 0;
 
-  delay: Tone;
+  delay: Tone.FeedbackDelay;
   delayTime = 0;
   delayFeedback = 0;
 
-  reverb: Tone;
+  reverb: Tone.Freeverb;
   reverbRoomSize = 0;
   reverbWet = 0;
 
-  synth: Tone;
+  synth: Tone.PolySynth;
+
+  private audioStarted = false;
+  private activeNotes = new Set<string>();
 
   notesArray = [
     ['C4', 'D4', 'E4', 'F4'],
@@ -66,92 +71,106 @@ export class Synth01Page implements AfterViewInit {
     }).chain(this.autoWah, this.vibrato, this.chorus, this.delay, this.reverb);
   }
 
-  /**
-   * リサイズイベント
-   */
+  ngOnDestroy() {
+    this.synth?.dispose();
+    this.autoWah?.dispose();
+    this.vibrato?.dispose();
+    this.chorus?.dispose();
+    this.delay?.dispose();
+    this.reverb?.dispose();
+  }
+
+  private isPortrait(): boolean {
+    if (window.matchMedia) {
+      return window.matchMedia('(orientation: portrait)').matches;
+    }
+    return window.innerHeight >= window.innerWidth;
+  }
+
   onResize() {
     this.setpadAreaSize();
     this.setEffectAreaSize();
   }
 
-  /**
-   * パッドエリアのサイズを指定
-   */
   setpadAreaSize() {
-    // 縦向き
-    if (window.orientation === 0) {
+    if (this.isPortrait()) {
       this.padAreaHeight = window.innerWidth;
       this.padAreaWidth = window.innerWidth;
     } else {
-      // 横向き
       this.padAreaHeight = window.innerHeight;
       this.padAreaWidth = window.innerHeight;
     }
   }
 
-  /**
-   * エフェクトエリアのサイズを指定
-   */
   setEffectAreaSize() {
-    // 縦向き
-    if (window.orientation === 0) {
+    if (this.isPortrait()) {
       this.effectAreaHeight = window.innerHeight - this.padAreaHeight;
       this.effectAreaWidth = window.innerWidth;
     } else {
-      // 横向き
       this.effectAreaHeight = window.innerHeight;
       this.effectAreaWidth = window.innerWidth - this.padAreaWidth;
     }
   }
 
-  /**
-   * 音を発生
-   * @param note 音階
-   * @param event イベント
-   */
-  noteOn(note, event) {
+  private async ensureAudioStarted(): Promise<void> {
+    if (!this.audioStarted) {
+      await Tone.start();
+      this.audioStarted = true;
+      this.showStartOverlay = false;
+      localStorage.setItem('tone-synth-started', '1');
+    }
+  }
+
+  async noteOn(note: string, event: Event) {
+    await this.ensureAudioStarted();
+    this.activeNotes.add(note);
     this.synth.triggerAttack(note);
-    // イベントの伝搬を停止
     event.stopPropagation();
     event.preventDefault();
   }
 
-  /**
-   * 音を停止
-   * @param note 音階
-   * @param event イベント
-   */
-  noteOff(note, event) {
+  noteOff(note: string, event: Event) {
+    if (!this.activeNotes.has(note)) {
+      return;
+    }
+    this.activeNotes.delete(note);
     this.synth.triggerRelease(note);
     event.stopPropagation();
     event.preventDefault();
   }
 
-  /**
-   * エフェクトの値が変更された時
-   * @param value エフェクトの値
-   */
-  onChangeValue(value) {
-    if (value === this.autoWahBaseFrequency) {
-      this.autoWah.baseFrequency = value;
-    }
-    if (value === this.vibratoFrequency) {
-      this.vibrato.frequency.value = value;
-    }
-    if (value === this.chorusFrequency) {
-      this.chorus.frequency.value = value;
-    }
-    if (value === this.delayTime) {
-      this.delay.delayTime.value = value;
-    }
-    if (value === this.delayFeedback) {
-      this.delay.feedback.value = value;
-    }
-    if (value === this.reverbRoomSize) {
-      this.reverb.roomSize.value = value;
-    }
-    if (value === this.reverbWet) {
-      this.reverb.wet.value = value;
-    }
+  onAutoWahChange(value: number) {
+    this.autoWahBaseFrequency = value;
+    this.autoWah.baseFrequency = value;
+  }
+
+  onVibratoChange(value: number) {
+    this.vibratoFrequency = value;
+    this.vibrato.frequency.value = value;
+  }
+
+  onChorusChange(value: number) {
+    this.chorusFrequency = value;
+    this.chorus.frequency.value = value;
+  }
+
+  onDelayTimeChange(value: number) {
+    this.delayTime = value;
+    this.delay.delayTime.value = value;
+  }
+
+  onDelayFeedbackChange(value: number) {
+    this.delayFeedback = value;
+    this.delay.feedback.value = value;
+  }
+
+  onReverbRoomSizeChange(value: number) {
+    this.reverbRoomSize = value;
+    this.reverb.roomSize.value = value;
+  }
+
+  onReverbWetChange(value: number) {
+    this.reverbWet = value;
+    this.reverb.wet.value = value;
   }
 }

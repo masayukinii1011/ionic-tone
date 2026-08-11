@@ -5,8 +5,8 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider ng serve",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -32,7 +32,6 @@
     "cordova-android": "8.1.0",
     "core-js": "^2.5.4",
     "electron": "^8.2.5",
-    "ngx-electron": "^2.2.0",
     "rxjs": "~6.5.1",
     "tone": "^13.8.25",
     "tslib": "^1.10.0",

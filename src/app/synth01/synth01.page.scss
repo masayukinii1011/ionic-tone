@@ -21,9 +21,16 @@ ion-col {
   cursor: pointer;
   border-right: solid 2px;
   border-bottom: solid 2px;
+  transition: transform 0.05s ease, opacity 0.05s ease;
 
   &:hover {
     opacity: 0.9;
+  }
+
+  &:active,
+  &.pad-active {
+    transform: scale(0.95);
+    opacity: 0.75;
   }
 }
 
@@ -137,12 +144,12 @@ ion-list {
 }
 
 ion-label {
-  font-size: 10px !important;
+  font-size: 12px !important;
 }
 
 .effect-name {
-  min-width: 90px;
-  max-width: 90px;
+  min-width: 100px;
+  max-width: 100px;
 }
 
 .effect-value {
@@ -197,5 +204,26 @@ ion-label {
   .pad-area {
     max-width: none;
     max-height: none;
+  }
+}
+
+.start-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+
+  p {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    padding: 16px 24px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
   }
 }

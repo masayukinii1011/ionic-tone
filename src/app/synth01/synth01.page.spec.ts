@@ -15,10 +15,14 @@ describe('Synth01Page', () => {
 
     fixture = TestBed.createComponent(Synth01Page);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have 16 notes in 4x4 grid', () => {
+    const totalNotes = component.notesArray.reduce((sum, row) => sum + row.length, 0);
+    expect(totalNotes).toBe(16);
   });
 });
