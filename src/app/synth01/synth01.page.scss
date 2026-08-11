@@ -139,8 +139,25 @@ ion-row:nth-child(4) {
 }
 
 ion-list {
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  height: 100%;
+}
+
+.effect-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.synth-info {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 6px 12px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ion-color-medium, #92949c);
+  text-align: center;
+  border-bottom: 1px solid var(--ion-color-light, #f4f5f8);
 }
 
 ion-label {
@@ -154,14 +171,6 @@ ion-label {
 
 .effect-value {
   width: 20px;
-}
-
-.synth-info {
-  margin: 8px 0 12px;
-  padding: 0 12px;
-  font-size: 11px;
-  color: var(--ion-color-medium, #92949c);
-  text-align: center;
 }
 
 @media screen and (orientation:portrait) {

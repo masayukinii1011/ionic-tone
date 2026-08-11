@@ -25,6 +25,7 @@
     </div>
 
     <div class="effect-area" [style.height.px]="effectAreaHeight" [style.width.px]="effectAreaWidth">
+      <p class="synth-info">Polyphony: {{ maxPolyphony }}</p>
       <ion-list class="ion-no-padding">
 
         <ion-item class="ion-no-padding">
@@ -83,7 +84,6 @@
           </ion-range>
         </ion-item>
       </ion-list>
-      <p class="synth-info">Polyphony: {{ maxPolyphony }}</p>
     </div>
   </div>
 </ion-content>
