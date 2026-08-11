@@ -8,6 +8,8 @@ import * as Tone from 'tone';
   standalone: false,
 })
 export class Synth01Page implements AfterViewInit, OnDestroy {
+  readonly maxPolyphony = 6;
+
   padAreaHeight: number;
   padAreaWidth: number;
   effectAreaHeight: number;
@@ -65,7 +67,7 @@ export class Synth01Page implements AfterViewInit, OnDestroy {
     this.reverb.wet.value = this.reverbWet / 100;
 
     this.synth = new Tone.PolySynth({
-      maxPolyphony: 6,
+      maxPolyphony: this.maxPolyphony,
       voice: Tone.Synth,
       options: {
         oscillator: {

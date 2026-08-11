@@ -156,6 +156,14 @@ ion-label {
   width: 20px;
 }
 
+.synth-info {
+  margin: 8px 0 12px;
+  padding: 0 12px;
+  font-size: 11px;
+  color: var(--ion-color-medium, #92949c);
+  text-align: center;
+}
+
 @media screen and (orientation:portrait) {
   .effect-name {
     padding-left: 8px;
