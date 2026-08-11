@@ -7,10 +7,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "electron:mac": "electron-packager ./electron ToneSynth --overwrite --platform=darwin --arch=arm64 --prune=true --out=release-builds",
-    "electron:win": "electron-packager ./electron ToneSynth --overwrite --asar=true --platform=win32 --arch=x64 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='ToneSynth'"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -22,12 +19,6 @@
     "@angular/platform-browser-dynamic": "^19.2.18",
     "@angular/router": "^19.2.18",
     "@angular/service-worker": "^19.2.18",
-    "@capacitor/android": "^7.5.0",
-    "@capacitor/app": "^7.1.1",
-    "@capacitor/core": "^7.5.0",
-    "@capacitor/haptics": "^7.0.3",
-    "@capacitor/keyboard": "^7.0.4",
-    "@capacitor/status-bar": "^7.0.4",
     "@ionic/angular": "^8.8.17",
     "ionicons": "^7.4.0",
     "rxjs": "~7.8.2",

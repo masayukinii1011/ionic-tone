@@ -1,8 +1,4 @@
 {
   "name": "ionic-tone",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular",
-  "orientation": "portrait"
+  "type": "angular"
 }
