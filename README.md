@@ -23,9 +23,15 @@ https://drive.google.com/file/d/171XiP-DMXLLhFa8WNXL7Ypxu3T7HaU8u/view
 
 https://drive.google.com/file/d/1Djnuihvq3WjYpak__liStpnyHwN5ZEa5/view
 
+## 技術スタック
+
+- Angular 19 / Ionic 8
+- Tone.js 15
+- Capacitor 7
+
 ## 開発
 
-Node.js 16 推奨（`.nvmrc` 参照）。Node 17 以降では OpenSSL 互換のため `npm` スクリプト内で `NODE_OPTIONS=--openssl-legacy-provider` を設定済みです。
+Node.js 20 推奨（`.nvmrc` 参照）。
 
 ```bash
 npm install

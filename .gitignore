@@ -19,6 +19,7 @@ npm-debug.log*
 
 /.idea
 /.ionic
+/.angular
 /.sass-cache
 /.sourcemaps
 /.versions
@@ -38,3 +39,4 @@ npm-debug.log*
 key.keystore
 sample.keystore
 tone-synth.apk
+tone-synth2.apk

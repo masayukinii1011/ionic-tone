@@ -5,6 +5,7 @@ import * as Tone from 'tone';
   selector: 'app-synth01',
   templateUrl: './synth01.page.html',
   styleUrls: ['./synth01.page.scss'],
+  standalone: false,
 })
 export class Synth01Page implements AfterViewInit, OnDestroy {
   padAreaHeight: number;
@@ -51,24 +52,33 @@ export class Synth01Page implements AfterViewInit, OnDestroy {
     this.vibrato = new Tone.Vibrato(this.vibratoFrequency);
     this.chorus = new Tone.Chorus(this.chorusFrequency);
 
-    this.delay = new Tone.FeedbackDelay(this.delayTime, this.delayFeedback);
-    this.delay.wet.value = 50;
+    this.delay = new Tone.FeedbackDelay({
+      delayTime: this.delayTime,
+      feedback: this.delayFeedback,
+    });
+    this.delay.wet.value = 0.5;
 
-    this.reverb = new Tone.Freeverb(this.reverbRoomSize, 4000);
-    this.reverb.wet.value = this.reverbWet;
-    this.reverb.toMaster();
+    this.reverb = new Tone.Freeverb({
+      roomSize: this.reverbRoomSize,
+      dampening: 4000,
+    });
+    this.reverb.wet.value = this.reverbWet / 100;
 
-    this.synth = new Tone.PolySynth(6, Tone.Synth, {
-      oscillator: {
-        type: 'triangle'
+    this.synth = new Tone.PolySynth({
+      maxPolyphony: 6,
+      voice: Tone.Synth,
+      options: {
+        oscillator: {
+          type: 'triangle'
+        },
+        envelope: {
+          attack: 0.04,
+          decay: 1,
+          sustain: 1,
+          release: 4
+        },
       },
-      envelope: {
-        attack: 0.04,
-        decay: 1,
-        sustain: 1,
-        release: 4
-      },
-    }).chain(this.autoWah, this.vibrato, this.chorus, this.delay, this.reverb);
+    }).chain(this.autoWah, this.vibrato, this.chorus, this.delay, this.reverb, Tone.Destination);
   }
 
   ngOnDestroy() {
@@ -171,6 +181,6 @@ export class Synth01Page implements AfterViewInit, OnDestroy {
 
   onReverbWetChange(value: number) {
     this.reverbWet = value;
-    this.reverb.wet.value = value;
+    this.reverb.wet.value = value / 100;
   }
 }
