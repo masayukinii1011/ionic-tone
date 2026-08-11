@@ -20,8 +20,8 @@
 ## 使い方
 
 1. 上のデモ URL を開く
-2. パッドをタップして音を開始（初回は AudioContext の起動が必要）
-3. 下部スライダーでエフェクトを調整
+2. パッドをタップして音を開始
+4. 下部スライダーでエフェクトを調整
 
 ### パッド
 
@@ -92,10 +92,3 @@ npm run build -- --configuration production
 | 公開ディレクトリ | `www` |
 | Node バージョン | 20（`netlify.toml`） |
 | SPA fallback | `netlify.toml` / `src/_redirects` |
-
----
-
-## 既知の制限
-
-- モバイルブラウザでは最初のタップで AudioContext が起動します
-- 推奨ブラウザ: Chrome / Safari / Firefox（最新版）
